@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Background · Zongze (Leo) Li</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    /* ── Education ── */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .edu-card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 20px;
+      padding: 30px 28px;
+    }
+    .edu-school {
+      font-size: 17px; font-weight: 600; color: var(--text);
+      letter-spacing: -0.02em; margin-bottom: 4px;
+    }
+    .edu-degree {
+      font-size: 13px; color: var(--text-muted); font-weight: 300;
+      margin-bottom: 20px; line-height: 1.45;
+    }
+    .edu-rows { display: flex; flex-direction: column; gap: 8px; }
+    .edu-row { display: flex; justify-content: space-between; align-items: baseline; }
+    .edu-lbl { font-size: 12px; color: var(--text-light); }
+    .edu-val { font-size: 13px; color: var(--text-muted); font-weight: 500; text-align: right; max-width: 60%; }
+    .edu-highlight {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 600; color: var(--accent);
+      background: rgba(0,113,227,0.08); border-radius: 980px; padding: 3px 12px;
+      margin-top: 14px;
+    }
+
+    /* ── Awards ── */
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 12px;
+    }
+    .award-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      transition: border-color 0.2s;
+    }
+    .award-card:hover { border-color: var(--border-strong); }
+    .award-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0; margin-top: 5px;
+    }
+    .award-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 3px; line-height: 1.3; }
+    .award-meta { font-size: 12px; color: var(--text-light); }
+
+    /* ── Experience ── */
+    .exp-entry {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: 22px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      transition: border-color 0.2s;
+    }
+    .exp-entry:hover { border-color: var(--border-strong); }
+
+    /* Lab photo banner */
+    .lab-photo {
+      width: 100%;
+      height: 220px;
+      background: var(--surface2);
+      position: relative;
+      overflow: hidden;
+    }
+    .lab-photo img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .lab-photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 10px;
+      background: var(--surface2);
+    }
+    .lab-photo-placeholder svg { opacity: 0.2; }
+    .lab-photo-placeholder span {
+      font-size: 11px; color: var(--text-light);
+      letter-spacing: 0.05em; text-transform: uppercase; opacity: 0.5;
+    }
+    .lab-photo-tag {
+      position: absolute;
+      bottom: 14px; left: 16px;
+      background: rgba(0,0,0,0.55);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      font-size: 11px; font-weight: 500;
+      border-radius: 980px; padding: 4px 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .exp-body { padding: 28px 30px 30px; }
+    .exp-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+    .exp-title { font-size: 17px; font-weight: 600; color: var(--text); letter-spacing: -0.02em; }
+    .exp-period {
+      font-size: 12px; color: var(--text-light); font-weight: 400;
+      white-space: nowrap; padding-top: 3px;
+    }
+    .exp-place { font-size: 13px; color: var(--accent); font-weight: 400; margin-bottom: 14px; }
+
+    /* Focus chips */
+    .exp-focus {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px;
+    }
+    .focus-chip {
+      font-size: 11px; font-weight: 500;
+      border-radius: 980px; padding: 4px 12px;
+    }
+    .focus-chip.blue  { background: rgba(0,113,227,0.10); color: #0060c7; }
+    .focus-chip.green { background: rgba(52,199,89,0.10);  color: #1a8c3a; }
+    .focus-chip.amber { background: rgba(255,149,0,0.10);  color: #9b5a00; }
+    .focus-chip.purple{ background: rgba(110,68,200,0.10); color: #5a30b0; }
+    @media (prefers-color-scheme: dark) {
+      .focus-chip.blue   { color: #60aaff; }
+      .focus-chip.green  { color: #4cd871; }
+      .focus-chip.amber  { color: #ffb340; }
+      .focus-chip.purple { color: #b590ff; }
+    }
+
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .exp-bullets li {
+      font-size: 14px; color: var(--text-muted); font-weight: 300;
+      line-height: 1.6; padding-left: 16px; position: relative;
+    }
+    .exp-bullets li::before {
+      content: '—'; position: absolute; left: 0;
+      color: var(--text-light); font-size: 12px; top: 1px;
+    }
+
+    @media (max-width: 720px) {
+      .edu-grid { grid-template-columns: 1fr; }
+      .exp-body { padding: 22px 20px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Zongze Li</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="background.html" class="active">Background</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <div class="section-label">Background</div>
+    <h1>Education, experience<br><strong>&amp; recognition.</strong></h1>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── Education ─────────────────────────────────── -->
+<section>
+  <div class="container">
+    <div class="section-label">Education</div>
+    <h2 class="section-title">Academic<br><strong>training.</strong></h2>
+    <div class="edu-grid">
+
+      <div class="edu-card fade-in">
+        <div class="edu-school">University of British Columbia</div>
+        <div class="edu-degree">Master of Applied Science<br>Biomedical Engineering</div>
+        <div class="edu-rows">
+          <div class="edu-row">
+            <span class="edu-lbl">Period</span>
+            <span class="edu-val">Sep 2024 – Present</span>
+          </div>
+          <div class="edu-row">
+            <span class="edu-lbl">GPA</span>
+            <span class="edu-val">94.5%</span>
+          </div>
+          <div class="edu-row">
+            <span class="edu-lbl">Supervisor</span>
+            <span class="edu-val">Prof. Tim Salcudean</span>
+          </div>
+          <div class="edu-row">
+            <span class="edu-lbl">Location</span>
+            <span class="edu-val">Vancouver, BC, Canada</span>
+          </div>
+        </div>
+        <div class="edu-highlight">MUSIC Program Awardee</div>
+      </div>
+
+      <div class="edu-card fade-in">
+        <div class="edu-school">City University of Hong Kong</div>
+        <div class="edu-degree">Bachelor of Engineering<br>Biomedical Engineering</div>
+        <div class="edu-rows">
+          <div class="edu-row">
+            <span class="edu-lbl">Period</span>
+            <span class="edu-val">Sep 2020 – Jun 2024</span>
+          </div>
+          <div class="edu-row">
+            <span class="edu-lbl">GPA</span>
+            <span class="edu-val">4.03 / 4.3</span>
+          </div>
+          <div class="edu-row">
+            <span class="edu-lbl">Rank</span>
+            <span class="edu-val">Department 1st · Summa Cum Laude</span>
+          </div>
+          <div class="edu-row">
+            <span class="edu-lbl">FYP</span>
+            <span class="edu-val">Adhesive electrode patch for heart condition assessment</span>
+          </div>
+        </div>
+        <div class="edu-highlight">HKSAR Gov. Scholarship × 3</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── Research Experience ────────────────────────── -->
+<section>
+  <div class="container">
+    <div class="section-label">Research Experience</div>
+    <h2 class="section-title">Labs I've<br><strong>worked in.</strong></h2>
+
+    <!-- UBC RCL -->
+    <div class="exp-entry fade-in">
+      <div class="lab-photo">
+        <!-- Replace with: <img src="images/rcl-lab.jpg" alt="Robotics and Control Lab, UBC" /> -->
+        <div class="lab-photo-placeholder">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="12" width="40" height="28" rx="3" stroke="#86868b" stroke-width="1.5"/>
+            <circle cx="24" cy="26" r="8" stroke="#86868b" stroke-width="1.5"/>
+            <circle cx="24" cy="26" r="3" fill="#86868b" opacity="0.3"/>
+            <path d="M16 12V8M32 12V8" stroke="#86868b" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Lab photo — rcl-lab.jpg</span>
+        </div>
+        <div class="lab-photo-tag">Robotics and Control Lab · UBC</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-header">
+          <div class="exp-title">Graduate Research Assistant</div>
+          <div class="exp-period">Sep 2024 – Present · Vancouver, BC</div>
+        </div>
+        <div class="exp-place">Robotics and Control Lab, UBC · Advisor: Prof. Tim Salcudean</div>
+        <div class="exp-focus">
+          <span class="focus-chip blue">Quantitative Ultrasound</span>
+          <span class="focus-chip blue">Medical Imaging</span>
+          <span class="focus-chip green">Machine Learning</span>
+          <span class="focus-chip green">MASLD Staging</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Developed an RF-based QUS attenuation pipeline for MASLD with fully automated ROI selection and robust attenuation estimation; demonstrated strong agreement with MRI-PDFF (n=35, Pearson r=0.924) and high diagnostic performance for steatosis grading (AUC ≥ 0.95) — manuscript in preparation for IEEE TUFFC.</li>
+          <li>Advancing attenuation estimation from global summaries to 3D spatial attenuation maps to enable localized fat assessment; conducting cross-system validation across ultrasound systems and probes, focusing on calibration strategies, reproducibility analysis, and bias characterization.</li>
+          <li>Expanding toward comprehensive MASLD staging (steatosis–inflammation–fibrosis) by integrating 3D shear-wave elastography with RF-derived QUS features for multi-parametric learning-based assessment.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CityU Soft Bio-electronics -->
+    <div class="exp-entry fade-in">
+      <div class="lab-photo">
+        <!-- Replace with: <img src="images/softbio-lab.jpg" alt="Lab of Soft Bio-electronics, CityU" /> -->
+        <div class="lab-photo-placeholder">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 24 C8 14 14 8 24 8 C34 8 40 14 40 24 C40 34 34 40 24 40 C14 40 8 34 8 24Z" stroke="#86868b" stroke-width="1.5"/>
+            <path d="M16 24 C16 20 20 16 24 16" stroke="#86868b" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M24 16 L24 10M24 38 L24 42M10 24 L6 24M42 24 L38 24" stroke="#86868b" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Lab photo — softbio-lab.jpg</span>
+        </div>
+        <div class="lab-photo-tag">Lab of Soft Bio-electronics · CityU</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-header">
+          <div class="exp-title">Undergraduate Research Assistant</div>
+          <div class="exp-period">Jun 2023 – Jun 2024 · Hong Kong</div>
+        </div>
+        <div class="exp-place">Lab of Soft Bio-electronics, CityU · Advisor: Prof. Xinge Yu</div>
+        <div class="exp-focus">
+          <span class="focus-chip amber">Wearable Electronics</span>
+          <span class="focus-chip amber">Skin-integrated Sensing</span>
+          <span class="focus-chip purple">Deep Learning</span>
+          <span class="focus-chip purple">Cardiac Monitoring</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Researched a skin-integrated pulse sensing system with deep learning for continuous cardiac function assessment — focusing on signal fidelity under realistic physiological conditions.</li>
+          <li>Designed pulse sensing modules; used finite element method (FEM) to optimize electrode placement geometry, improving signal stability and reducing motion artifact contamination.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CityU Biomedical Robotics -->
+    <div class="exp-entry fade-in">
+      <div class="lab-photo">
+        <!-- Replace with: <img src="images/robotics-lab.jpg" alt="Biomedical Robotics Lab, CityU" /> -->
+        <div class="lab-photo-placeholder">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="14" y="18" width="20" height="18" rx="3" stroke="#86868b" stroke-width="1.5"/>
+            <path d="M24 18V12M20 12H28" stroke="#86868b" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="19" cy="27" r="2" fill="#86868b" opacity="0.4"/>
+            <circle cx="29" cy="27" r="2" fill="#86868b" opacity="0.4"/>
+            <path d="M14 32 L8 38M34 32 L40 38" stroke="#86868b" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Lab photo — robotics-lab.jpg</span>
+        </div>
+        <div class="lab-photo-tag">Biomedical Robotics Lab · CityU</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-header">
+          <div class="exp-title">Undergraduate Researcher (Full Assistantship)</div>
+          <div class="exp-period">Feb 2023 – Jun 2023 · Hong Kong</div>
+        </div>
+        <div class="exp-place">Biomedical Robotics Lab, CityU · Advisor: Dr. Jiachen Zhang</div>
+        <div class="exp-focus">
+          <span class="focus-chip blue">Magnetic Actuation</span>
+          <span class="focus-chip blue">Microrobotics</span>
+          <span class="focus-chip green">Real-time Control</span>
+          <span class="focus-chip green">Helmholtz Coil</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Developed a real-time control system for a magnetically actuated robot, generating coil-amplifier voltage waveforms to synthesize fields enabling multi-mode locomotion and seamless gait transitions.</li>
+          <li>Contributed to the full Helmholtz coil platform build, including system design, parameter customization, software modeling, equipment procurement, installation, and testing.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CityU Dong Sun Lab -->
+    <div class="exp-entry fade-in">
+      <div class="lab-photo">
+        <!-- Replace with: <img src="images/sunlab.jpg" alt="Prof. Dong Sun's Lab, CityU" /> -->
+        <div class="lab-photo-placeholder">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="6" stroke="#86868b" stroke-width="1.5"/>
+            <circle cx="24" cy="10" r="3" stroke="#86868b" stroke-width="1.5"/>
+            <circle cx="24" cy="38" r="3" stroke="#86868b" stroke-width="1.5"/>
+            <circle cx="10" cy="24" r="3" stroke="#86868b" stroke-width="1.5"/>
+            <circle cx="38" cy="24" r="3" stroke="#86868b" stroke-width="1.5"/>
+            <path d="M24 18V13M24 30V35M18 24H13M30 24H35" stroke="#86868b" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Lab photo — sunlab.jpg</span>
+        </div>
+        <div class="lab-photo-tag">Prof. Dong Sun's Lab · CityU</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-header">
+          <div class="exp-title">Undergraduate Research Assistant</div>
+          <div class="exp-period">Jan 2021 – Mar 2023 · Hong Kong</div>
+        </div>
+        <div class="exp-place">Prof. Dong Sun's Lab, CityU · Advisor: Prof. Dong Sun</div>
+        <div class="exp-focus">
+          <span class="focus-chip purple">Cell Microcarriers</span>
+          <span class="focus-chip purple">Microrobotics</span>
+          <span class="focus-chip amber">FEM Simulation</span>
+          <span class="focus-chip amber">Cell Biology</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Researched a novel cell microcarrier and tested its mobility and cell-loading capacity for targeted therapeutic delivery applications.</li>
+          <li>Performed FEM-based structural and flow simulations to guide microrobot design; validated mobility and cell-loading performance in bench-top experiments.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── Awards ─────────────────────────────────────── -->
+<section>
+  <div class="container">
+    <div class="section-label">Recognition</div>
+    <h2 class="section-title">Awards &<br><strong>scholarships.</strong></h2>
+    <div class="awards-grid">
+
+      <div class="award-card fade-in">
+        <div class="award-dot"></div>
+        <div>
+          <div class="award-title">MUSIC Program Awardee</div>
+          <div class="award-meta">UBC · 2024 · $18,000 CAD</div>
+        </div>
+      </div>
+      <div class="award-card fade-in">
+        <div class="award-dot"></div>
+        <div>
+          <div class="award-title">International Tuition Award (× 2)</div>
+          <div class="award-meta">UBC · 2024 &amp; 2025 · $3,200 each</div>
+        </div>
+      </div>
+      <div class="award-card fade-in">
+        <div class="award-dot"></div>
+        <div>
+          <div class="award-title">HKSAR Government Scholarship (Top 1%, × 3)</div>
+          <div class="award-meta">CityU · 2022–2024 · HK$80,000 each</div>
+        </div>
+      </div>
+      <div class="award-card fade-in">
+        <div class="award-dot"></div>
+        <div>
+          <div class="award-title">College of Engineering Dean's Scholarship (Top 1%)</div>
+          <div class="award-meta">CityU · 2023 · HK$25,000</div>
+        </div>
+      </div>
+      <div class="award-card fade-in">
+        <div class="award-dot"></div>
+        <div>
+          <div class="award-title">ASM Pacific Technology Scholarship (Top 3%)</div>
+          <div class="award-meta">CityU · 2022 · HK$12,500</div>
+        </div>
+      </div>
+      <div class="award-card fade-in">
+        <div class="award-dot"></div>
+        <div>
+          <div class="award-title">BME Outstanding Student Award (× 2)</div>
+          <div class="award-meta">CityU · 2021 &amp; 2023</div>
+        </div>
+      </div>
+      <div class="award-card fade-in">
+        <div class="award-dot"></div>
+        <div>
+          <div class="award-title">CityU Talent Award (Top 10%, × 3)</div>
+          <div class="award-meta">CityU · 2022–2024</div>
+        </div>
+      </div>
+
+    </div>
+    <div style="height: 60px;"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+<footer class="container">
+  <p>© 2025 Zongze (Leo) Li · Vancouver, BC</p>
+  <p>Hosted on GitHub Pages</p>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 90);
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
